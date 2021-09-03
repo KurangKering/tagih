@@ -51,12 +51,16 @@ $routes->group('/', ['filter' => 'authFilter:bendahara'], function($routes) {
 	$routes->post('mahasiswa/create', 'MahasiswaController::create');
 	$routes->post('mahasiswa/update', 'MahasiswaController::update');
 	$routes->get('mahasiswa/delete', 'MahasiswaController::delete');
+
+	$routes->get('periode', 'PeriodeController::index');
 	$routes->get('periode/data', 'PeriodeController::data');
 	$routes->get('periode/data-json-dt', 'PeriodeController::dataJsonDT');
 	$routes->get('periode/delete', 'PeriodeController::delete');
 	$routes->post('periode/create-update', 'PeriodeController::createUpdate');
+
 	$routes->get('mahasiswa-periode/data', 'MahasiswaPeriodeController::data');
 	$routes->get('mahasiswa-periode/data-json-dt', 'MahasiswaPeriodeController::dataJsonDT');
+
 	$routes->get('tagihan/data-bendahara', 'TagihanController::dataBendahara');
 	$routes->get('tagihan/data-bendahara-json-dt', 'TagihanController::dataBendaharaJsonDT');
 	$routes->get('tagihan/delete', 'TagihanController::delete');
@@ -82,8 +86,9 @@ $routes->group('/', ['filter' => 'authFilter'], function($routes) {
 
 	$routes->get('mahasiswa', 'MahasiswaController::index');
 	$routes->get('mahasiswa/edit', 'MahasiswaController::edit');
-	$routes->get('mahasiswa-periode', 'MahasiswaPeriodeController::data');
+	$routes->get('mahasiswa-periode', 'MahasiswaPeriodeController::index');
 	$routes->get('tagihan', 'TagihanController::index');
+	$routes->get('periode', 'PeriodeController::index');
 });
 
 $routes->get('auth/login', 'AuthController::login', ['filter' => 'noAuthFilter']);

@@ -13,7 +13,6 @@ class RunMeSeeder extends Seeder
 		$this->call('PaymentSeeder');
 		$this->call('RoleWithUserExceptMahasiswaSeeder');
 		$this->call('UserWithMahasiswaSeeder');
-		$this->call('PaymentSeeder');
 		$this->call('MahasiswaPaymentSeeder');
 	}
 }

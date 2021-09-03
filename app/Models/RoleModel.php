@@ -6,15 +6,13 @@ use CodeIgniter\Model;
 
 class RoleModel extends Model
 {
-	protected $table                = 'role';
-	protected $allowedFields        = [
-		'nama',
-		'description',
-		'model',
-	];
-	protected $returnType    = 'App\Entities\RoleEntity';
+    protected $table = 'role';
 
+    protected $allowedFields = [
+        'nama',
+        'description',
+        'model',
+    ];
 
-	
-
+    protected $returnType = 'App\Entities\RoleEntity';
 }

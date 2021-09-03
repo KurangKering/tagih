@@ -6,10 +6,9 @@ use CodeIgniter\Model;
 
 class FakultasModel extends Model
 {
-	protected $table                = 'fakultas';
-	protected $allowedFields        = [
-		'nama',
-	];
-	protected $returnType    = 'App\Entities\FakultasEntity';
+    protected $table = 'fakultas';
 
+    protected $allowedFields = ['nama'];
+
+    protected $returnType = 'App\Entities\FakultasEntity';
 }

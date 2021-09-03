@@ -41,10 +41,13 @@ class UserWithMahasiswaSeeder extends Seeder
 			$noTengah = $faker->randomNumber($nbDigits = 4);
 			$noBelakang = $faker->randomNumber($nbDigits = 4);
 			$noHp = $noDepan[array_rand($noDepan)] . $noTengah . $noBelakang;
+
+			$semester = [null, 1, 2, 3, 4, 5];
 			$mahasiswa = [
 				'nim' => $nim,
 				'nama' => $faker->name,
 				'tahun_masuk' => date('Y-m-d'),
+				'semester_berjalan' => $semester[array_rand($semester)],
 				'no_hp'	=> (string) $noHp,
 				'email' => $faker->email,
 				'alamat' => $faker->address,

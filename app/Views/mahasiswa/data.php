@@ -10,10 +10,7 @@
 			<button class="btn btn-primary" id="tambah_mahasiswa_button">Tambah Mahasiswa</button>
 		</div>
 	</div>
-
 	<div class="section-body">
-		
-
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
@@ -23,7 +20,6 @@
 							<table class="table table-striped" id="mahasiswa_table">
 								<thead>
 									<tr>
-										
 										<th>ID</th>
 										<th>NIM</th>
 										<th>Nama</th>
@@ -34,7 +30,6 @@
 										<th width="1%">Action</th>
 									</tr>
 								</thead>
-								
 							</table>
 						</div>
 					</div>
@@ -44,6 +39,14 @@
 		
 	</div>
 </section>
+<template  id="render-action-button-template">
+	<div class="btn-group" style="white-space: nowrap;">
+		<button type="button" class="btn  btn-outline-info btn-edit" onclick="show_edit_mahasiswa_modal('place_here')"><i class="fas fa-edit"></i> Ubah</button>
+		<button type="button" class="btn  btn-outline-danger btn-delete" onclick="show_delete_mahasiswa_modal('place_here')" ><i class="fas fa-trash"></i> Hapus</button>
+	</div>
+</template>
+<?= $this->endSection() ?>
+
 <?= $this->section('modal') ?>
 <div class="modal fade " id="mahasiswa_modal">
 	<div class="modal-dialog">
@@ -73,9 +76,6 @@
 						<label for="semester">Semester</label>
 						<input type="text" class="form-control" id="semester" >
 					</div>
-					
-					
-					
 				</div>
 				<div class="modal-footer  card-footer">
 
@@ -85,26 +85,13 @@
 				</div>
 			</form>
 		</div>
-		<!-- /.modal-content -->
 	</div>
-	<!-- /.modal-dialog -->
 </div>
-<?= $this->endSection() ?>
-<!-- /.modal -->
-
-<template  id="render-action-button-template">
-	<div class="btn-group" style="white-space: nowrap;">
-		<button type="button" class="btn  btn-outline-info btn-edit" onclick="show_edit_mahasiswa_modal('place_here')"><i class="fas fa-edit"></i> Ubah</button>
-		<button type="button" class="btn  btn-outline-danger btn-delete" onclick="show_delete_mahasiswa_modal('place_here')" ><i class="fas fa-trash"></i> Hapus</button>
-	</div>
-</template>
 <?= $this->endSection() ?>
 
 <?= $this->section('inline-js') ?>
 <script>
 	$(function() {
-
-
 		$("#mahasiswa_form").submit(function(e) {
 			e.preventDefault();
 
@@ -115,7 +102,6 @@
 				semester_berjalan: $("#semester").val(),
 				angkatan: $("#angkatan").val(),
 			};
-
 			$.ajax({
 				url: '<?= base_url("mahasiswa/create-update") ?>',
 				type: 'POST',
@@ -123,22 +109,17 @@
 			})
 			.done(function(response) {
 				if (!response.success) {
-
 				} else {
 					clearMahasiswaForm();
 					mahasiswa_table.ajax.reload(null, false);
 					$("#mahasiswa_modal").modal('hide');
 					swal({icon: 'success', showConfirmButton: false, timer: 1000})
-					
 				}
 			});
-			
 		});
-
 		$("#tambah_mahasiswa_button").click(function(e) {
 			show_tambah_mahasiswa_modal();
 		});
-
 		let mahasiswa_table = $("#mahasiswa_table").DataTable({
 			"processing": true,
 			"serverSide": true,
@@ -173,13 +154,9 @@
 				}
 			} ,
 			],
-
 			"order": [[ 0, "desc" ]]
-			
-
 		});
 	});
-
 
 	function clearMahasiswaForm() {
 		$("#id").val('');
@@ -188,13 +165,11 @@
 		$("#semester").val('');
 		$("#angkatan").val('');
 	}
-
 	function show_tambah_mahasiswa_modal() {
 		clearMahasiswaForm();
 		$("#modal_title").text('Form tambah Mahasiswa');
 		$("#mahasiswa_modal").modal('show');
 	}
-
 	function show_delete_mahasiswa_modal(id) {
 		swal({
 			icon : 'warning',
@@ -219,18 +194,10 @@
 						swal({icon: 'success', showConfirmButton: false, timer: 1000})
 					}
 				});
-			} else {
-				swal('Your imaginary file is safe!');
-			}
-			
-		} );
-
-		
-		
+			} 
+		});
 	}
 	function show_edit_mahasiswa_modal(id) {
-
-
 		$.ajax({
 			url: '<?= base_url("mahasiswa/show") ?>',
 			type: 'GET',
@@ -251,15 +218,13 @@
 				$("#mahasiswa_modal").modal('show');
 			}
 		});
-		
 	}
 	function render_edit_delete_button(id) {
 		let tmpl = $("#render-action-button-template").html();
 		tmpl = tmpl.replace('place_here', id);
 		tmpl = tmpl.replace('place_here', id);
-
 		return tmpl;
-
 	}
+
 </script>
 <?= $this->endSection() ?>

@@ -6,12 +6,12 @@ use CodeIgniter\Model;
 
 class PaymentModel extends Model
 {
-	protected $table                = 'payment';
-	protected $allowedFields        = [
-		'nama',
-		'va_depan',
-	];
+    protected $table = 'payment';
 
-	protected $returnType    = 'App\Entities\PaymentEntity';
+    protected $allowedFields = [
+        'nama',
+        'va_depan',
+    ];
 
+    protected $returnType = 'App\Entities\PaymentEntity';
 }
