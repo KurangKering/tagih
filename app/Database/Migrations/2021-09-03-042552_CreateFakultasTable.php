@@ -4,35 +4,31 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class KataDasar extends Migration
-{	
-	const TABLE = 'kata_dasar';
+class CreateFakultasTable extends Migration
+{
+	const TABLE = 'fakultas';
 
 	public function up()
 	{
 		$this->forge->addField([
 			'id'          => [
 				'type'           => 'INT',
-				'constraint'     => 5,
+				'constraint'     => 11,
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'kata'       => [
+			'nama'       => [
 				'type'       => 'VARCHAR',
-				'constraint' => '100',
+				'constraint' => '50',
+				'null'	=> false,
 			],
-			'arti_kata'       => [
-				'type'       => 'VARCHAR',
-				'constraint' => '250',
-			]
 		]);
 		$this->forge->addKey('id', true);
-		$this->forge->createTable(KataDasar::TABLE);
+		$this->forge->createTable(CreateFakultasTable::TABLE);
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable(KataDasar::TABLE);
+		$this->forge->dropTable(CreateFakultasTable::TABLE);
 	}
-
 }
