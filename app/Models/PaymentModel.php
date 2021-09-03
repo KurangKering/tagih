@@ -9,6 +9,7 @@ class PaymentModel extends Model
 	protected $table                = 'payment';
 	protected $allowedFields        = [
 		'nama',
+		'va_depan',
 	];
 
 	protected $returnType    = 'App\Entities\PaymentEntity';

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\MahasiswaModel;
 use App\Models\TagihanModel;
-
+use App\Models\UserModel;
 class MahasiswaController extends ResourceController
 {
     public function __construct()
@@ -104,7 +104,18 @@ class MahasiswaController extends ResourceController
             'nama' => $formData['nama'],
             'semester_berjalan' => $formData['semester_berjalan'],
             'angkatan' => $formData['angkatan'],
+            'prodi_id' => $formData['prodi_id'],
         ];
+
+        $userModel = new UserModel();
+        $user = [
+            'username' => $formData['nim'],
+            'password' => 'asd',
+            'role_id'  => 'mahasiswa',
+        ];
+        $userModel->insert($user);
+
+        $dataInsert['user_id'] = $userModel->getInsertID();
 
         $this->mahasiswaModel->insert($dataInsert);
         $context = [

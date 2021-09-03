@@ -34,13 +34,6 @@ class CreateUserTable extends Migration
 				'unsigned'		=> true,
 				'null'			=> false,
 			],
-			'foreign_id' =>	[
-				'type'			=> 'INT',
-				'constraint'	=> 11,
-				'unsigned'		=> true,
-				'null'			=> true,
-			],
-		
 		]);
 
 

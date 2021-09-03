@@ -19,6 +19,7 @@ class MahasiswaModel extends Model
 		'alamat',
 		'prodi_id',
 		'status',
+		'user_id',
 	];
 	protected $returnType    = 'App\Entities\MahasiswaEntity';
 

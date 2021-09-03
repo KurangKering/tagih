@@ -29,7 +29,7 @@ class CreateProdiTable extends Migration
 			],
 		]);
 		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('fakultas_id', 'fakultas', 'id');
+		$this->forge->addForeignKey('fakultas_id', 'fakultas', 'id', '', 'CASCADE');
 
 		$this->forge->createTable(CreateProdiTable::TABLE);
 	}

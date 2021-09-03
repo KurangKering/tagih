@@ -11,7 +11,6 @@ class UserModel extends Model
 		'username',
 		'password',
 		'role_id',
-		'foreign_id',
 	];
 	protected $returnType    = 'App\Entities\UserEntity';
 

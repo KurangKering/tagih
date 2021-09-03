@@ -39,7 +39,7 @@ class AuthController extends BaseController
 
             if ($role == 'mahasiswa') {
                 $mahasiswaModel = new MahasiswaModel();
-                $mahasiswaData = $mahasiswaModel->where('id', $userData->foreign_id)->first();
+                $mahasiswaData = $mahasiswaModel->where('user_id', $userData->id)->first();
                 $sessionMahasiswa = array(
                     'mahasiswa_id' => $mahasiswaData->id,
                     'mahasiswa_nama' => $mahasiswaData->nama,

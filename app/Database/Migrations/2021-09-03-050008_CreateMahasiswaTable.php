@@ -20,7 +20,7 @@ class CreateMahasiswaTable extends Migration
 			],
 			'nim' =>	[
 				'type'			=> 'CHAR',
-				'constraint'	=> 15,
+				'constraint'	=> 10,
 				'unique'		=> true,
 			],
 			'nama' =>	[
@@ -63,12 +63,19 @@ class CreateMahasiswaTable extends Migration
 				'null'			=> false,
 				'default'		=> 'active',
 			],
+			'user_id' =>	[
+				'type'			=> 'INT',
+				'constraint'	=> 11,
+				'unsigned'		=> true,
+				'null'			=> false,
+			],
 		]);
 
 
 
 		$this->forge->addKey('id', true);
 		$this->forge->addForeignKey('prodi_id', 'prodi', 'id');
+		$this->forge->addForeignKey('user_id', 'user', 'id');
 
 		$this->forge->createTable(CreateMahasiswaTable::TABLE);
 	}
