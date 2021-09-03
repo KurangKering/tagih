@@ -116,3 +116,5 @@ _modules/*
 /.phpunit.*.cache
 
 node_modules/
+
+public/NULL/
