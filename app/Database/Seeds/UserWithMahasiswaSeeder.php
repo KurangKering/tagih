@@ -59,7 +59,7 @@ class UserWithMahasiswaSeeder extends Seeder
 			$mahasiswaModel = new MahasiswaModel();
 			$mahasiswaModel->insert($mahasiswa);
 
-			if ($i == 0 && $mahasiswaModel->getInsertID()) {
+			if ($i < 5 && $mahasiswaModel->getInsertID()) {
 				echo "Username : {$user['username']}" . PHP_EOL;
 				echo "Password : {$passwordDefault}" . PHP_EOL;
 				echo "Role : Mahasiswa" . PHP_EOL;
