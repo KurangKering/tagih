@@ -199,7 +199,6 @@
 			.done(function(response) {
 				if (!response.success) {
 				} else {
-					clearMahasiswaForm();
 					tagihan_table.ajax.reload(null, false);
 					$("#bayar_modal").modal('hide');
 					swal({icon: 'success', showConfirmButton: false, timer: 1000})
