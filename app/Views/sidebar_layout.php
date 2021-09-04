@@ -8,11 +8,7 @@
     </div>
     <ul class="sidebar-menu">
       <?php $role = session('role'); ?>
-      <li>
-        <a class="nav-link" href="<?= base_url('/') ?>">
-          <i class="far fa-square"></i> <span>Dashboard</span>
-        </a>
-      </li>
+      
 
       <?php if ($role == 'pimpinan'): ?>
         <li>

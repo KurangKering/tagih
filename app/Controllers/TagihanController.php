@@ -165,8 +165,6 @@ class TagihanController extends BaseController
      */
     public function dataMahasiswa()
     {
-        // dapatkan id mahasiswa yang sedang login
-        $mahasiswa_id = $this->session->get('data')['mahasiswa_id'];
         // letakkan seluruh data periode dari database ke variable. urukan menurut id desc
         $dataPeriode = $this->periodeModel->orderBy('id', 'DESC')->findAll();
         // ambil seluruh data jenis tagihan dan letakkan ke variable
@@ -192,9 +190,9 @@ class TagihanController extends BaseController
         // tampung filter data
         $filters = $this->request->getGet('filters');
         // tampung id mahasiswa yang sedang login
-        $mahasiswa_id = session()->get('data')['mahasiswa_id'];
+        $mahasiswaId = session()->get('data')['mahasiswa_id'];
         // proses mengambil data tagihan dari database untuk dikirim ke datatable
-        $tagihanData = $this->tagihanModel->getDataJsonDT($filters, $mahasiswa_id);
+        $tagihanData = $this->tagihanModel->getDataJsonDT($filters, $mahasiswaId);
     }
 
     /**
@@ -302,7 +300,57 @@ class TagihanController extends BaseController
      */
     public function grafikPimpinan()
     {
+        // dapatkan data periode. urutkan menurut id desc, simpan ke variable
+        $dataPeriode = $this->periodeModel->orderBy('id', 'DESC')->findAll();
+        // dapatkan seluruh semester yang berjalan
+        $dataSemester = $this->tagihanModel->getSemesterDistinct() ?? [];
+        // dapatkan jenis tagihan
+        $dataJenisTagihan = $this->jenisTagihanModel->get()->getResult();
+        $context = [
+            'data_periode' => $dataPeriode,
+            'data_jenis_tagihan' => $dataJenisTagihan,
+            'data_semester' => $dataSemester,
+        ];
+
+        return view('tagihan/grafik-pimpinan', $context);
+
+    }
+
+    public function grafikPimpinanJson()
+    {
         $filters = $this->request->getGet('filters');
-        $tagihanData = $this->tagihanModel->getDataJsonDT($filters);
+        
+        $tagihanData = $this->tagihanModel->getTotalLunasBelum($filters);
+
+        $isiData = [];
+        $backgroundColor = [];
+        $labels = [];
+
+        foreach ($tagihanData as $index => $data) {
+            if ($data->status == "lunas") {
+                array_push($isiData, $data->jumlah);
+                array_push($backgroundColor, "#63ed7a");
+                array_push($labels, "Lunas");
+
+            } elseif ($data->status == "belum") {
+                array_push($isiData, $data->jumlah);
+                array_push($backgroundColor, "#fc544b");
+                array_push($labels, "Belum");
+            }
+        }
+
+        $returnData = [];
+
+        $returnData['datasets'] = array(
+            array(
+                'data' => $isiData,
+                'backgroundColor' => $backgroundColor,
+                'label' => 'Grafik Lunas dan Belum',
+            ),
+        );
+        $returnData['labels'] = $labels;
+
+        return $this->response->setJSON($returnData);
+
     }
 }

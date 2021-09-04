@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <link rel="stylesheet" href="<?= base_url('node_modules/bootstrap-social/bootstrap-social.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('plugins/sweetalert2/sweetalert2.min.css') ?>">
 
   <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/components.css') ?>">
@@ -34,86 +35,113 @@
                     <label for="username">Username</label>
                     <input id="username" type="text" class="form-control" name="username" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
-                      Please fill in your email
+                      Harap isi username
                     </div>
                   </div>
 
                   <div class="form-group">
                     <div class="d-block">
                     	<label for="password" class="control-label">Password</label>
-                      <div class="float-right">
-                        <a href="#" class="text-small">
-                          Forgot Password?
-                        </a>
-                      </div>
+
                     </div>
                     <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                     <div class="invalid-feedback">
-                      please fill in your password
-                    </div>
-                  </div>
+                     Harap isi password
+                   </div>
+                 </div>
 
-                  
 
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      Login
-                    </button>
-                  </div>
-                </form>
-                
-                
 
-              </div>
+                 <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                    Login
+                  </button>
+                </div>
+              </form>
+
+
+
             </div>
-            
-            <div class="simple-footer">
-            </div>
+          </div>
+
+          <div class="simple-footer">
           </div>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="<?= base_url('assets/js/stisla.js') ?>"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="<?= base_url('plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
 
-  <script src="<?= base_url('assets/js/scripts.js') ?>"></script>
-  <script src="<?= base_url('assets/js/custom.js') ?>"></script>
+<script src="<?= base_url('assets/js/stisla.js') ?>"></script>
+
+<script src="<?= base_url('assets/js/scripts.js') ?>"></script>
+<script src="<?= base_url('assets/js/custom.js') ?>"></script>
 
 
-  <script>
-    $(function() {
-      $("#form-login").submit(function(e) {
-        e.preventDefault();
+<script>
+  $(function() {
 
-        let username = $("#username").val();
-        let password = $("#password").val();
 
-        let postData = {
-          'username': username,
-          'password': password,
-        };
+    $("#form-login").submit(function(e) {
 
-        $.ajax({
-          url: '<?= base_url("auth/process-login") ?>',
-          type: 'POST',
-          data: postData,
-        })
-        .done(function(result) {
-          
-          if (result.success) {
-            location.href = '<?= base_url() ?>';
-          }
-        });
-        
+      e.preventDefault();
 
+      let username = $("#username").val();
+      let password = $("#password").val();
+
+      if (username == "" || password == "") {
+        return;
+      }
+
+      let postData = {
+        'username': username,
+        'password': password,
+      };
+
+      $.ajax({
+        url: '<?= base_url("auth/process-login") ?>',
+        type: 'POST',
+        data: postData,
       })
+      .done(function(result) {
+
+        if (result.success) {
+          location.href = '<?= base_url() ?>';
+        } else {
+
+          Swal.fire({
+            icon: 'warning',
+            title: 'Login Gagal',
+            text: 'Silahkan periksa username atau password anda',
+            showConfirmButton: false,
+            timer: 1000
+          });
+        }
+      })
+      .catch(function(result) {
+        Swal.fire({
+          icon: 'warning',
+          title: result.status,
+          text: result.statusText,
+          showConfirmButton: false,
+          timer: 1000
+        });
+      })
+      .done(function(result) {
+        
+      });
+
+
     });
-  </script>
+
+  });
+</script>
 </body>
 </html>

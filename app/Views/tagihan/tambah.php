@@ -50,7 +50,7 @@
 									<th>NIM</th>
 									<th>Nama</th>
 									<th>Semester</th>
-									<th width="1%">Action</th>
+									<!-- <th width="1%">Action</th> -->
 								</tr>
 							</thead>
 						</table>
@@ -223,15 +223,15 @@
 			{ "data": "nim" },
 			{ "data": "nama" },
 			{ "data": "semester_berjalan" },
-			{ "data": null },
+			// { "data": null },
 			],
-			"columnDefs": [ {
-				"targets": -1,
-				"data": null,
-				"render" : function(data, type, row) {
-					return render_edit_delete_button(row['id']);
-				}
-			} ],
+			// "columnDefs": [ {
+			// 	"targets": -1,
+			// 	"data": null,
+			// 	"render" : function(data, type, row) {
+			// 		return render_edit_delete_button(row['id']);
+			// 	}
+			// } ],
 		});
 	});
 	function showTambahTagihanMasal() {

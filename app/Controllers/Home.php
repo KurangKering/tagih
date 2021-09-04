@@ -6,6 +6,22 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('dashboard');
+        $role = session()->get('role');
+
+        switch ($role) {
+        	case 'pimpinan':
+        		return redirect()->to('tagihan/data-pimpinan');
+        		break;
+        	case 'bendahara':
+        		return redirect()->to('tagihan/data-bendahara');
+        		break;
+			
+			case 'mahasiswa':
+        		return redirect()->to('tagihan/data-mahasiswa');
+        		break;
+        	
+        	default:
+        		break;
+        }
     }
 }

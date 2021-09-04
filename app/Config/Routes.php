@@ -77,6 +77,7 @@ $routes->group('/', ['filter' => 'authFilter:pimpinan'], function($routes) {
 	$routes->get('tagihan/data-pimpinan', 'TagihanController::dataPimpinan');
 	$routes->get('tagihan/data-pimpinan-json-dt', 'TagihanController::dataPimpinanJsonDT');
 	$routes->get('tagihan/grafik-pimpinan', 'TagihanController::grafikPimpinan');
+	$routes->get('tagihan/grafik-pimpinan-json', 'TagihanController::grafikPimpinanJson');
 
 });
 

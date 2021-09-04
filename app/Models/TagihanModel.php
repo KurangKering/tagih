@@ -34,28 +34,32 @@ class TagihanModel extends Model
     {
         $dt = new Datatables(new Codeigniter4Adapter());
         $query = 'select 
-		tagihan.id as tagihan_id, 
-		mahasiswa.nim, 
-		mahasiswa.nama, 
-		mahasiswa_periode.semester, 
-		tagihan.status, 
-		tagihan.biaya, 
-		periode.periode, 
-		periode.tahun,
-		jenis_tagihan.nama as jenis
-		from tagihan 
-		join mahasiswa_periode on tagihan.mahasiswa_periode_id = mahasiswa_periode.id 
-		join mahasiswa on mahasiswa.id = mahasiswa_periode.mahasiswa_id 
-		join periode on periode.id = mahasiswa_periode.periode_id
-		join jenis_tagihan on tagihan.jenis_tagihan_id = jenis_tagihan.id';
+        tagihan.id as tagihan_id, 
+        mahasiswa.nim, 
+        mahasiswa.nama, 
+        mahasiswa_periode.semester, 
+        tagihan.status, 
+        tagihan.biaya, 
+        periode.periode, 
+        periode.tahun,
+        jenis_tagihan.nama as jenis
+        from tagihan 
+        join mahasiswa_periode on tagihan.mahasiswa_periode_id = mahasiswa_periode.id 
+        join mahasiswa on mahasiswa.id = mahasiswa_periode.mahasiswa_id 
+        join periode on periode.id = mahasiswa_periode.periode_id
+        join jenis_tagihan on tagihan.jenis_tagihan_id = jenis_tagihan.id';
         $filter_array = [];
-        if (count($conditions) > 0) {
-            $filter_array = $this->sanitizeConditions($conditions);
-            if (null != $mahasiswa_id) {
-                $filter_array['mahasiswa.id'] = $mahasiswa_id;
+        if (is_array($conditions)) {
+
+            if (count($conditions) > 0) {
+                $filter_array = $this->sanitizeConditions($conditions);
+
             }
         }
 
+        if (null != $mahasiswa_id) {
+            $filter_array['mahasiswa.id'] = $mahasiswa_id;
+        }
         $where = [];
         foreach ($filter_array as $key => $value) {
             $where[] = $key.' = '.$value;
@@ -64,6 +68,7 @@ class TagihanModel extends Model
         if (!empty($where)) {
             $query .= ' where '.implode(' AND ', $where);
         }
+
 
         $dt->query($query);
         $dt->add(
@@ -109,18 +114,18 @@ class TagihanModel extends Model
         $periode_id = $conditions['periode_id'];
         $jenis_tagihan_id = $conditions['jenis_tagihan_id'];
         $query = 'select 
-		mp.id as mp_id,
-		mhs.nim,
-		mhs.nama,
-		mhs.semester_berjalan
-		from mahasiswa_periode mp 
-		join mahasiswa mhs on mp.mahasiswa_id = mhs.id
-		join periode p on mp.periode_id = p.id and p.id = ?
-		where mp.id not in (select tg.mahasiswa_periode_id
-		from tagihan tg
-		join mahasiswa_periode mp on mp.id = tg.mahasiswa_periode_id
-		join periode p on p.id = mp.periode_id and periode_id = ?
-		where tg.jenis_tagihan_id = ?  group by (mahasiswa_periode_id))';
+        mp.id as mp_id,
+        mhs.nim,
+        mhs.nama,
+        mhs.semester_berjalan
+        from mahasiswa_periode mp 
+        join mahasiswa mhs on mp.mahasiswa_id = mhs.id
+        join periode p on mp.periode_id = p.id and p.id = ?
+        where mp.id not in (select tg.mahasiswa_periode_id
+        from tagihan tg
+        join mahasiswa_periode mp on mp.id = tg.mahasiswa_periode_id
+        join periode p on p.id = mp.periode_id and periode_id = ?
+        where tg.jenis_tagihan_id = ?  group by (mahasiswa_periode_id))';
         $db = \Config\Database::connect();
         $query = $db->query($query, [$periode_id, $periode_id, $jenis_tagihan_id]);
 
@@ -130,17 +135,17 @@ class TagihanModel extends Model
     public function getInfoTagihanMahasiswa($tagihanId)
     {
         $sql = 'select 
-		t.id as tagihan_id,
-		p.periode,
-		p.tahun,
-		jt.nama as jenis_tagihan,
-		t.biaya
-		from tagihan t
-		join jenis_tagihan as jt on t.jenis_tagihan_id = jt.id
-		join mahasiswa_periode mp on t.mahasiswa_periode_id = mp.id
-		join periode p on p.id = mp.periode_id
-		where t.id = ?
-		';
+        t.id as tagihan_id,
+        p.periode,
+        p.tahun,
+        jt.nama as jenis_tagihan,
+        t.biaya
+        from tagihan t
+        join jenis_tagihan as jt on t.jenis_tagihan_id = jt.id
+        join mahasiswa_periode mp on t.mahasiswa_periode_id = mp.id
+        join periode p on p.id = mp.periode_id
+        where t.id = ?
+        ';
         $db = \Config\Database::connect();
         $query = $db->query($sql, [$tagihanId]);
 
@@ -164,5 +169,42 @@ class TagihanModel extends Model
     public function getSemesterDistinct()
     {
         return $this->select('distinct(mp.semester)')->join('mahasiswa_periode mp', 'tagihan.mahasiswa_periode_id = mp.id')->orderBy('semester', 'ASC')->get()->getResult();
+    }
+
+    public function getTotalLunasBelum($conditions = null)
+    {
+        $query = "select 
+        tagihan.status, 
+        count(tagihan.id) as jumlah
+        from tagihan 
+        join mahasiswa_periode on tagihan.mahasiswa_periode_id = mahasiswa_periode.id 
+        join mahasiswa on mahasiswa.id = mahasiswa_periode.mahasiswa_id 
+        join periode on periode.id = mahasiswa_periode.periode_id
+        join jenis_tagihan on tagihan.jenis_tagihan_id = jenis_tagihan.id";
+
+        $filter_array = [];
+        if (is_array($conditions)) {
+
+            if (count($conditions) > 0) {
+                $filter_array = $this->sanitizeConditions($conditions);
+
+            }
+        }
+
+        $where = [];
+        foreach ($filter_array as $key => $value) {
+            $where[] = $key.' = '.$value;
+        }
+
+        if (!empty($where)) {
+            $query .= ' where '.implode(' AND ', $where);
+        }
+
+        $query .= " group by (tagihan.status)";
+        
+        $db = \Config\Database::connect();
+        $query = $db->query($query);
+
+        return $query->getResult();
     }
 }

@@ -15,6 +15,7 @@
 <script src="<?= base_url('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
 <script src="<?= base_url('node_modules/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
 <script src="<?= base_url('node_modules/sweetalert/dist/sweetalert.min.js') ?>"></script>
+<script src="<?= base_url('node_modules/chart.js/dist/Chart.min.js') ?>"></script>
 
 <script src="<?= base_url('assets/js/scripts.js') ?>"></script>
 <script src="<?= base_url('assets/js/custom.js') ?>"></script>
