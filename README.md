@@ -69,8 +69,8 @@ php spark migrate
 php spark db:seed RunMeSeeder
 ```
 
-apabila berhasil, anda akan melihat data user yang dapat digunakan untuk login.
-untuk melihat seluruh data user menggunakan mysql manager seperti phpmyadmin.
+	apabila berhasil, anda akan melihat data user yang dapat digunakan untuk login.
+	untuk melihat seluruh data user menggunakan mysql manager seperti phpmyadmin.
 
 4. **Jalankan Sistem**
 
