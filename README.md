@@ -38,7 +38,8 @@ Sistem tagihan mahasiswa adalah sistem yang mengelola tagihan mahasiswa. **Siste
 
 	- php-7.4.19
 	- mysql-5.7.33
-	
+
+
 
 1. **Clone Repository**
 
@@ -66,11 +67,10 @@ database.default.DBPrefix =
 ```bash
 php spark migrate
 php spark db:seed RunMeSeeder
+```
 
 apabila berhasil, anda akan melihat data user yang dapat digunakan untuk login.
-untuk percobaan, hanya 1 user mahasiswa yang ditampilkan. apabila ingin login mahasiswa lainnya, maka lihat 
-data user menggunakan mysql manager seperti phpmyadmin.
-```
+untuk melihat seluruh data user menggunakan mysql manager seperti phpmyadmin.
 
 4. **Jalankan Sistem**
 
