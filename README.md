@@ -1,56 +1,73 @@
-# CodeIgniter 4 Framework
+<h1 align="center">Selamat datang di Sistem Tagihan Mahsiswa</h1>
 
-## What is CodeIgniter?
+## Apa itu Sistem Tagihan Mahasiswa?
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
+Sistem tagihan mahasiswa adalah sistem yang mengelola tagihan mahasiswa. **Sistem ini dibuat dalam rangka tes Programmer di Garuda Cyber Indonesia**
 
-This repository holds the distributable version of the framework,
-including the user guide. It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Fitur apa saja yang tersedia?
 
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
+- Autentikasi Bendahara, Pimpinan, Mahasiswa
+- Data Mahasiswa 
+- Kelola Periode Semester
+- Data Tagihan
+- Menambah Data Tagihan
+- Menghapus Data Tagihan
+- Membayar Data Tagihan
+- Melihat Grafik Tagihan Lunas dan Belum
+- Dan lain-lain
 
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
 
+## Akun default
 
-## Important Change with index.php
+**Pimpinan Default Account**
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- username: pimpinan
+- Password: asd
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+---
+**Bendahara Default Account**
 
-**Please** read the user guide for a better explanation of how CI4 works!
+- username: bendahara
+- Password: asd
 
-## Repository Management
+---
 
-We use Github issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+## Install
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+1. **Clone Repository**
 
-## Contributing
+```bash
+git clone https://github.com/KurangKering/tagih.git
+cd tagih
+composer install
+```
 
-We welcome contributions from the community.
+2. **Buka `.env` lalu ubah baris berikut sesuai dengan databasemu yang ingin dipakai**
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+```bash
+database.default.hostname = localhost
+database.default.database = tagihan
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+```
 
-## Server Requirements
+jangan lupa create database nya terlebih dahulu.
 
-PHP version 7.3 or higher is required, with the following extensions installed:
+3. **Instalasi sistem**
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+```bash
+php spark migrate
+php spark db:seed RunMeSeeder
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+apabila berhasil, anda akan melihat data user yang dapat digunakan untuk login.
+untuk percobaan, hanya 1 user mahasiswa yang ditampilkan. apabila ingin login mahasiswa lainnya, maka lihat 
+data user menggunakan mysql manager seperti phpmyadmin.
+```
 
-- json (enabled by default - don't turn it off)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-- xml (enabled by default - don't turn it off)
+4. **Jalankan Sistem**
+
+```bash
+php artisan serve
+```
