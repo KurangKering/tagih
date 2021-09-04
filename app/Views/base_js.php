@@ -6,16 +6,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="<?= base_url('assets/js/stisla.js') ?>"></script>
 
-<script src="<?= base_url('node_modules/jquery-sparkline/jquery.sparkline.min.js') ?>"></script>
-<script src="<?= base_url('node_modules/chart.js/dist/Chart.min.js') ?>"></script>
-<script src="<?= base_url('node_modules/owl.carousel/dist/owl.carousel.min.js') ?>"></script>
-<script src="<?= base_url('node_modules/summernote/dist/summernote-bs4.js') ?>"></script>
-<script src="<?= base_url('node_modules/chocolat/dist/js/jquery.chocolat.min.js') ?>"></script>
-<script src="<?= base_url('node_modules/datatables/media/js/jquery.dataTables.min.js') ?>"></script>
-<script src="<?= base_url('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
-<script src="<?= base_url('node_modules/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
-<script src="<?= base_url('node_modules/sweetalert/dist/sweetalert.min.js') ?>"></script>
-<script src="<?= base_url('node_modules/chart.js/dist/Chart.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/jquery-sparkline/jquery.sparkline.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/chart.js/dist/Chart.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/owl.carousel/dist/owl.carousel.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/summernote/dist/summernote-bs4.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/chocolat/dist/js/jquery.chocolat.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/datatables/media/js/jquery.dataTables.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/datatables.net-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/sweetalert/dist/sweetalert.min.js') ?>"></script>
+<script src="<?= base_url('plugins_stisla/chart.js/dist/Chart.min.js') ?>"></script>
 
 <script src="<?= base_url('assets/js/scripts.js') ?>"></script>
 <script src="<?= base_url('assets/js/custom.js') ?>"></script>

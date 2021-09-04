@@ -84,6 +84,16 @@
 		}
 	});
 	$(function() {
+		$.ajax({
+			url: '<?= base_url('tagihan/grafik-pimpinan-json') ?>',
+			type: 'GET',
+			data: {filters: listOfFilter},
+		})
+		.done(function(result) {
+			console.log("success");
+			myChart.data = result;
+			myChart.update();
+		});
 		$(".filters").change(function(event) {
 			listOfFilter['periode_id'] = $("#filter_periode").val();
 			listOfFilter['semester'] = $("#filter_semester").val();
