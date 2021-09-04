@@ -73,5 +73,5 @@ php spark db:seed RunMeSeeder
 4. **Jalankan Sistem**
 
 ```bash
-php artisan serve
+php spark serve
 ```
