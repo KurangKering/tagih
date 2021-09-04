@@ -32,14 +32,11 @@ Sistem tagihan mahasiswa adalah sistem yang mengelola tagihan mahasiswa. **Siste
 
 ---
 
+## Persiapan
+- php-7.4.19
+- mysql-5.7.33
+
 ## Install
-
-- **Persiapan**
-
-	- php-7.4.19
-	- mysql-5.7.33
-
-
 
 1. **Clone Repository**
 
